@@ -166,10 +166,21 @@ cask "emacs-app-linux" do
       desktop_content.gsub!(%r{Exec=/usr/local/bin/emacsclient}, "Exec=#{HOMEBREW_PREFIX}/bin/emacsclient")
       desktop_content.gsub!("Exec=emacsclient", "Exec=#{HOMEBREW_PREFIX}/bin/emacsclient")
 
-      # Only set StartupWMClass on emacs.desktop so the window matches the correct launcher.
-      # Remove it from other desktop files to prevent them from claiming the Emacs window.
+      # Only set StartupWMClass on emacs.desktop so the window matches the
+      # correct launcher. Remove it from other desktop files to prevent them
+      # from claiming the Emacs window.
       if desktop_name == "emacs"
-        desktop_content.gsub!(/^StartupWMClass=.*/i, "StartupWMClass=#{emacs_wm_class}")
+        if desktop_content.match?(/^StartupWMClass=/i)
+          # Replace any existing StartupWMClass line.
+          desktop_content.gsub!(/^StartupWMClass=.*/i, "StartupWMClass=#{emacs_wm_class}")
+        elsif desktop_content.sub!(/^StartupNotify=.*$/i) { |line| "#{line}\nStartupWMClass=#{emacs_wm_class}" }
+          # Inserted after StartupNotify.
+        elsif desktop_content.sub!(/^Categories=.*$/i) { |line| "StartupWMClass=#{emacs_wm_class}\n#{line}" }
+          # Inserted before Categories.
+        else
+          # Fallback: append at end if neither StartupNotify nor Categories exists.
+          desktop_content << "\nStartupWMClass=#{emacs_wm_class}\n"
+        end
       else
         desktop_content.gsub!(/^StartupWMClass=.*\n?/i, "")
       end
