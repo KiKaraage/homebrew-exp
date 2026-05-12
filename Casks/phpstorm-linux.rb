@@ -4,8 +4,12 @@ cask "phpstorm-linux" do
   os linux: "linux"
 
   version "2026.1.1,261.23567.149"
-  sha256 x86_64_linux: "4ce4a2140a6157f258ad483db41fc102d0068e7e8fd03a5a6073b65b715c0864",
-         arm64_linux:  "7d682ec20510b2d0b2b4030a6a6e2c7338847b23b1544848c52d4ef351ceff22"
+  on_intel do
+    sha256 "4ce4a2140a6157f258ad483db41fc102d0068e7e8fd03a5a6073b65b715c0864"
+  end
+  on_arm do
+    sha256 "7d682ec20510b2d0b2b4030a6a6e2c7338847b23b1544848c52d4ef351ceff22"
+  end
 
   url "https://download.jetbrains.com/webide/PhpStorm-#{version.csv.first}#{arch}.tar.gz"
   name "PhpStorm"
