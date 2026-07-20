@@ -35,6 +35,7 @@ cask "claude-desktop-linux" do
     desktop_file = "#{staged_path}/usr/share/applications/com.anthropic.Claude.desktop"
     content = File.read(desktop_file)
     content.gsub!(/^Exec=.*/, "Exec=#{HOMEBREW_PREFIX}/bin/claude-desktop %U")
+    content.gsub!(/^Icon=.*/, "Icon=#{Dir.home}/.local/share/icons/hicolor/256x256/apps/claude-desktop.png")
     File.write(desktop_file, content)
   end
 
