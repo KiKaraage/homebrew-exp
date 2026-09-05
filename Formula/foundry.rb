@@ -1,7 +1,7 @@
 class Foundry < Formula
   desc "Command-line tool for building and managing IDE-like development environments"
   homepage "https://gitlab.gnome.org/GNOME/foundry"
-  url "https://gitlab.gnome.org/GNOME/foundry.git", tag: "1.0.1", revision: "f6d82499d3ef5004526049c6abd9d09bbe2301d5"
+  url "https://gitlab.gnome.org/GNOME/foundry.git", tag: "1.1.1", revision: "2e1c08595a2e769c9ba59ec195001c6cdce26a31"
   license "LGPL-2.1-or-later"
 
   livecheck do
