@@ -15,8 +15,8 @@ class Compass < Formula
 
   depends_on "pkg-config" => :build
   depends_on "rust" => :build
-  depends_on :linux
   depends_on "libxkbcommon"
+  depends_on :linux
   depends_on "node"
   depends_on "openssl@3"
 
