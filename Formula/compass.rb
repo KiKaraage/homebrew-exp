@@ -30,10 +30,10 @@ class Compass < Formula
     # scripts/packaging/install-rust-engine.sh, which stays the canonical
     # list of what an install contains.
     ENV["CARGO_TARGET_DIR"] = buildpath/"cargo-target"
-    system "cargo", "install", "--locked", *std_cargo_args(path: "crates/compass")
-    system "cargo", "install", "--locked", "--bin", "compass-sandbox-exec",
+    system "cargo", "install", *std_cargo_args(path: "crates/compass")
+    system "cargo", "install", "--bin", "compass-sandbox-exec",
            *std_cargo_args(path: "crates/compass-sandbox")
-    system "cargo", "install", "--locked", *std_cargo_args(path: "crates/compass-input-server")
+    system "cargo", "install", *std_cargo_args(path: "crates/compass-input-server")
     # cargo install puts every binary on PATH, but the engine finds its
     # helpers in ../libexec/compass from bin/ — so they move there.
     (libexec/"compass").mkpath
