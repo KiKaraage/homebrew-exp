@@ -23,15 +23,17 @@ class Compass < Formula
   def install
     # The extension runtime bundle the engine refuses to run without.
     system "./scripts/build-extension-runtime.sh"
-    # Every binary the repo's packages ship. `cargo install` (rather than
-    # `cargo build` plus the install script) is what `brew audit` requires;
-    # the layout below mirrors scripts/packaging/install-rust-engine.sh,
-    # which stays the canonical list of what an install contains.
-    system "cargo", "install", "--locked",
-           "-p", "compass",
-           "-p", "compass-sandbox",
-           "-p", "compass-input-server",
-           "--bins", *std_cargo_args
+    # One install per crate: `-p` cannot combine with the `--path` inside
+    # `std_cargo_args` (cargo rejects it), and `brew audit` refuses
+    # `cargo build` outright. A shared target dir keeps the three installs
+    # from rebuilding dependencies three times. The layout below mirrors
+    # scripts/packaging/install-rust-engine.sh, which stays the canonical
+    # list of what an install contains.
+    ENV["CARGO_TARGET_DIR"] = buildpath/"cargo-target"
+    system "cargo", "install", "--locked", *std_cargo_args(path: "crates/compass")
+    system "cargo", "install", "--locked", "--bin", "compass-sandbox-exec",
+           *std_cargo_args(path: "crates/compass-sandbox")
+    system "cargo", "install", "--locked", *std_cargo_args(path: "crates/compass-input-server")
     # cargo install puts every binary on PATH, but the engine finds its
     # helpers in ../libexec/compass from bin/ — so they move there.
     (libexec/"compass").mkpath
