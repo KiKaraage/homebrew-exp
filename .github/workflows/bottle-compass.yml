@@ -103,9 +103,9 @@ jobs:
           VERSION: ${{ needs.resolve-version.outputs.version }}
         run: |
           if gh release view "compass-${VERSION}" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-            gh release upload "compass-${VERSION}" ./*.bottle.tar.gz --clobber --repo "$GITHUB_REPOSITORY"
+            gh release upload "compass-${VERSION}" ./*.bottle*.tar.gz --clobber --repo "$GITHUB_REPOSITORY"
           else
-            gh release create "compass-${VERSION}" ./*.bottle.tar.gz \
+            gh release create "compass-${VERSION}" ./*.bottle*.tar.gz \
               --title "compass ${VERSION} bottles" \
               --notes "Bottles for compass ${VERSION}" \
               --repo "$GITHUB_REPOSITORY"
