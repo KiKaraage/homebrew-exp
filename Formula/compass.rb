@@ -13,6 +13,13 @@ class Compass < Formula
     strategy :github_latest
   end
 
+  bottle do
+    root_url "https://github.com/ublue-os/homebrew-experimental-tap/releases/download/compass-0.28.2"
+    rebuild 1
+    sha256 cellar: :any, arm64_linux:  "1b7f61e389b0f46c2e7c8c3b039736c0208533c721a749f1ba8c1a476c518e3c"
+    sha256 cellar: :any, x86_64_linux: "f32f736a4e70b0061d825e8693f4eb566ab26b1dabe7a531c026afb861620089"
+  end
+
   depends_on "pkg-config" => :build
   depends_on "rust" => :build
   depends_on "libxkbcommon"
