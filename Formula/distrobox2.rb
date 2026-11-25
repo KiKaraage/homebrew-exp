@@ -14,8 +14,9 @@ class Distrobox2 < Formula
 
   bottle do
     root_url "https://github.com/ublue-os/homebrew-experimental-tap/releases/download/distrobox2-2.0.0-rc.3"
-    sha256 cellar: :any_skip_relocation, arm64_linux:  "c1a5328237d6374d36a959a58f0ad97358ead9a8115f9dfef7b0db6dc3374946"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "52c23dc6d3f98c82323eab5dbef5dc19ed42e500ca87130ab2b51f0cce258b74"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_linux:  "275e35c2ea762ce4797200c396b23606330447d3eb046884b8b78d2f7fe6b330"
+    sha256 cellar: :any,                 x86_64_linux: "96795b7980eec6c109362d0692932b3ba9e1ce26a41f9ea2a3378b2581092456"
   end
 
   depends_on "go" => :build
@@ -23,7 +24,7 @@ class Distrobox2 < Formula
   def install
     # Build the distrobox binary
     system "go", "build",
-           "-ldflags", "-s -w -X main.Version=#{version}",
+           "-ldflags", "-s -w -X github.com/89luca89/distrobox/pkg/version.Version=#{version}",
            "-o", "distrobox2",
            "./cmd/distrobox"
 
@@ -31,7 +32,7 @@ class Distrobox2 < Formula
   end
 
   test do
-    output = shell_output("#{bin}/distrobox2 --version")
-    assert_includes output, "distrobox"
+    output = shell_output("#{bin}/distrobox2 --help")
+    assert_match version.to_s, output
   end
 end

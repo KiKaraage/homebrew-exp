@@ -3,8 +3,8 @@ class Compass < Formula
   homepage "https://github.com/tuna-os/compass"
   # Linux-only: the engine targets Linux sessions (Wayland, portals, logind);
   # there is no macOS or Windows backend (see ADR-0007 in the repo).
-  url "https://github.com/tuna-os/compass/archive/refs/tags/v0.28.2.tar.gz"
-  sha256 "0d6e30f4607c139cdcca509546fcdb30f07a87b6849cab8d664de0a60edb0547"
+  url "https://github.com/tuna-os/compass/archive/refs/tags/v0.28.8.tar.gz"
+  sha256 "a92f13c41351ebab482454aee6709365173d5535476bbc9895b15a22df354416"
   license "GPL-3.0-only"
   head "https://github.com/tuna-os/compass.git", branch: "main"
 
@@ -14,10 +14,10 @@ class Compass < Formula
   end
 
   bottle do
-    root_url "https://github.com/ublue-os/homebrew-experimental-tap/releases/download/compass-0.28.2"
-    rebuild 1
-    sha256 cellar: :any, arm64_linux:  "1b7f61e389b0f46c2e7c8c3b039736c0208533c721a749f1ba8c1a476c518e3c"
-    sha256 cellar: :any, x86_64_linux: "f32f736a4e70b0061d825e8693f4eb566ab26b1dabe7a531c026afb861620089"
+    root_url "https://github.com/ublue-os/homebrew-experimental-tap/releases/download/compass-0.28.8"
+    rebuild 5
+    sha256 cellar: :any, arm64_linux:  "ab2ac47dd4a9e4b5e96f5be99c3f1b7d63611d5dfaa1bbaed02ec69497860a09"
+    sha256 cellar: :any, x86_64_linux: "c43da5a2ac678ccde8d921f7546877e88ef740f89daba36f8309fc76eaca8d6e"
   end
 
   depends_on "pkg-config" => :build

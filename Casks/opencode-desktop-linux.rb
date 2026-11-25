@@ -1,9 +1,9 @@
 cask "opencode-desktop-linux" do
   arch arm: "aarch64", intel: "x86_64"
 
-  version "2.0.21"
-  sha256 arm64_linux:  "453e6e19b7e532b14f38dff0b2e6a3299aebecb81372dd9fec132edfd1f20831",
-         x86_64_linux: "29d2ba769f59f7773101c742fc1a9994515035c1bcacbdf544491d6bdcb82afd"
+  version "2.4.1"
+  sha256 arm64_linux:  "7628e7ec3bedc42861deb7c3951ca7d41d71185e5bfaeb140b5df7dc56f8082e",
+         x86_64_linux: "2243281e8a1735bc351613e828857f199bfbed75b6d4c0f8c492489d17223796"
 
   # 2.x desktop builds are not on GitHub releases; the anomalyco feed stops at
   # v1.18.32. Filenames are unchanged, so only the host differs.
@@ -27,17 +27,19 @@ cask "opencode-desktop-linux" do
   depends_on formula: "rpm2cpio"
   depends_on linux: :any
 
-  binary "opt/OpenCode/ai.opencode.desktop", target: "opencode-desktop"
+  # 2.2.x RPMs ship ai.opencode and ai.opencode.png. The desktop file's
+  # Icon= key is ai.opencode, so the installed icon must keep that basename.
+  binary "opt/OpenCode/ai.opencode", target: "opencode-desktop"
   artifact "usr/share/applications/opencode-desktop.desktop",
            target: "#{Dir.home}/.local/share/applications/opencode-desktop.desktop"
   artifact "usr/share/applications/ai.opencode.desktop.desktop",
            target: "#{Dir.home}/.local/share/applications/ai.opencode.desktop.desktop"
-  artifact "usr/share/icons/hicolor/32x32/apps/ai.opencode.desktop.png",
-           target: "#{Dir.home}/.local/share/icons/hicolor/32x32/apps/ai.opencode.desktop.png"
-  artifact "usr/share/icons/hicolor/64x64/apps/ai.opencode.desktop.png",
-           target: "#{Dir.home}/.local/share/icons/hicolor/64x64/apps/ai.opencode.desktop.png"
-  artifact "usr/share/icons/hicolor/128x128/apps/ai.opencode.desktop.png",
-           target: "#{Dir.home}/.local/share/icons/hicolor/128x128/apps/ai.opencode.desktop.png"
+  artifact "usr/share/icons/hicolor/32x32/apps/ai.opencode.png",
+           target: "#{Dir.home}/.local/share/icons/hicolor/32x32/apps/ai.opencode.png"
+  artifact "usr/share/icons/hicolor/64x64/apps/ai.opencode.png",
+           target: "#{Dir.home}/.local/share/icons/hicolor/64x64/apps/ai.opencode.png"
+  artifact "usr/share/icons/hicolor/128x128/apps/ai.opencode.png",
+           target: "#{Dir.home}/.local/share/icons/hicolor/128x128/apps/ai.opencode.png"
 
   preflight_steps do
     # Normalise the arch-specific RPM filename, then split extraction.

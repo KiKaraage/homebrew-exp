@@ -1,6 +1,6 @@
 cask "claude-desktop-linux" do
-  version "2.9939.4"
-  sha256 "3cfddb23bf2911e05e27b4ed3856b8e795df94643b2c35b59deb317cf995bca0"
+  version "6.28899.6"
+  sha256 "7e381601d86570149643d52e9b89c26575ab12fa788aa41ffdd4cca5b0638cf8"
 
   url "https://downloads.claude.ai/claude-desktop/apt/stable/pool/main/c/claude-desktop/claude-desktop_#{version}_amd64.deb"
   name "Claude"
